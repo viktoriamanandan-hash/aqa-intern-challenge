@@ -21,11 +21,18 @@ export class WidgetPage {
     }
 
     async openWidget() {
-        return this.wrapper().locator(WidgetPage.selector.BUTTON_OPEN).click();
+        return this.page.locator('[data-test="openWidget"]').click();
     }
 
     async getPopularArticles() {
-        return this.wrapper().locator(WidgetPage.selector.ARTICLE_POPULAR_LIST_ITEM).all()
+        const wrapper = this.wrapper();
+    
+        console.log(
+            'HTML виджета:',
+            (await wrapper.innerHTML()).slice(0, 10000)
+        );
+    
+        return wrapper.locator(WidgetPage.selector.ARTICLE_POPULAR_LIST_ITEM).all();
     }
 
     async clickWriteToUs() {
